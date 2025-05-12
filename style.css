@@ -1,0 +1,361 @@
+/* Basic Reset & Font Import */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- THEME VARIABLES --- */
+:root {
+    --bg-color-light: #f4f4f8;
+    --text-color-light: #1a1a1a;
+    --primary-color-light: #007bff;
+    --secondary-color-light: #e9ecef;
+    --accent-color-light: #ff4081;
+    --hero-overlay-light: rgba(255, 255, 255, 0.6);
+
+    --bg-color-dark: #1a1a1a;
+    --text-color-dark: #f4f4f8;
+    --primary-color-dark: #0d6efd; /* Slightly brighter blue for dark mode */
+    --secondary-color-dark: #343a40;
+    --accent-color-dark: #f06292; /* Slightly softer pink */
+    --hero-overlay-dark: rgba(0, 0, 0, 0.6);
+
+    /* Font Families */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+
+    /* Transitions */
+    --transition-speed: 0.3s ease;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- DARK MODE --- */
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+/* --- UTILITIES --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- HEADER --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: transparent; /* Make transparent to show hero behind */
+    position: absolute; /* Position over hero */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color-light); /* Start with light theme color */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .logo {
+    color: var(--text-color-dark);
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.1);
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    transition: background-color var(--transition-speed);
+}
+#theme-toggle:hover {
+    background-color: var(--secondary-color-light);
+}
+body.dark-mode #theme-toggle:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+#theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-color-light); /* Default sun color */
+}
+body.dark-mode #theme-toggle svg {
+    fill: var(--text-color-dark); /* Default moon color */
+}
+
+/* Hide moon in light mode, sun in dark mode */
+body:not(.dark-mode) #theme-toggle .moon { display: none; }
+body.dark-mode #theme-toggle .sun { display: none; }
+
+/* --- HERO SECTION --- */
+.hero {
+    position: relative; /* Needed for absolute positioning of content and overlay */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-color-light); /* Text color on hero (adjust if needed) */
+    overflow: hidden; /* Hide video overflow */
+     /* --- BACKGROUND IMAGE PLACEHOLDER --- */
+
+}
+body.dark-mode .hero {
+        background: url('manz.jpg') no-repeat center center/cover;
+
+     color: var(--text-color-dark);
+}
+
+
+/* Optional Video Background Styling */
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 0;
+}
+
+/* Overlay to make text readable over background */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--hero-overlay-light);
+    z-index: 1;
+    transition: background-color var(--transition-speed);
+}
+body.dark-mode .hero::before {
+    background-color: var(--hero-overlay-dark);
+}
+
+
+.hero-content {
+    position: relative; /* Place content above the overlay */
+    z-index: 2;
+    padding: 2rem;
+    max-width: 800px;
+    animation: fadeIn 1.5s ease-out; /* Simple fade-in animation */
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem; /* Adjust size as needed */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color-light);
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform 0.2s ease;
+}
+body.dark-mode .cta-button {
+    background-color: var(--primary-color-dark);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-color-light);
+    transform: translateY(-2px);
+}
+body.dark-mode .cta-button:hover {
+     background-color: var(--accent-color-dark);
+}
+
+/* --- COUNTDOWN SECTION --- */
+.countdown {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: var(--secondary-color-light);
+    transition: background-color var(--transition-speed);
+}
+body.dark-mode .countdown {
+    background-color: var(--secondary-color-dark);
+}
+
+.countdown h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between units */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.time-unit {
+    background-color: var(--bg-color-light);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    min-width: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+body.dark-mode .time-unit {
+     background-color: var(--bg-color-dark);
+     box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+
+.time-unit span {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color-light);
+    line-height: 1.1;
+     transition: color var(--transition-speed);
+}
+body.dark-mode .time-unit span {
+     color: var(--primary-color-dark);
+}
+
+.time-unit label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-color-light);
+    opacity: 0.7;
+    transition: color var(--transition-speed);
+}
+body.dark-mode .time-unit label {
+     color: var(--text-color-dark);
+}
+
+
+/* --- DETAILS SECTION --- */
+.details-section {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto; /* Center the content */
+    text-align: center; /* Center text within section */
+}
+
+.details-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.details-section p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* --- FOOTER --- */
+footer {
+    margin-top: auto; /* Push footer to the bottom */
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--secondary-color-light);
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+body.dark-mode footer {
+     background-color: var(--secondary-color-dark);
+     color: var(--text-color-dark);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .countdown h2 {
+        font-size: 1.8rem;
+    }
+    #timer {
+        gap: 0.5rem;
+    }
+    .time-unit {
+        padding: 0.8rem 1rem;
+        min-width: 65px;
+    }
+    .time-unit span {
+        font-size: 1.8rem;
+    }
+     .details-section h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+     header {
+        padding: 0.8rem 1rem;
+     }
+    .logo {
+        font-size: 1.2rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+     .cta-button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+    .time-unit {
+         padding: 0.5rem;
+         min-width: 55px;
+    }
+     .time-unit span {
+        font-size: 1.5rem;
+    }
+     .time-unit label {
+        font-size: 0.7rem;
+    }
+}
