@@ -113,23 +113,21 @@ body.dark-mode #theme-toggle .sun { display: none; }
 
 /* --- HERO SECTION --- */
 .hero {
-    position: relative; /* Needed for absolute positioning of content and overlay */
-    height: 100vh; /* Full viewport height */
+    position: relative;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--text-color-light); /* Text color on hero (adjust if needed) */
-    overflow: hidden; /* Hide video overflow */
-     /* --- BACKGROUND IMAGE PLACEHOLDER --- */
-
+    color: var(--text-color-light);
+    overflow: hidden;
+    /* Responsive background image for light mode (optional) */
+    background: url('manz.jpg') no-repeat center center/cover;
 }
 body.dark-mode .hero {
-        background: url('manz.jpg') no-repeat center center/cover;
-
-     color: var(--text-color-dark);
+    background: url('manz.jpg') no-repeat center center/cover;
+    color: var(--text-color-dark);
 }
-
 
 /* Optional Video Background Styling */
 #bg-video {
@@ -159,7 +157,6 @@ body.dark-mode .hero {
 body.dark-mode .hero::before {
     background-color: var(--hero-overlay-dark);
 }
-
 
 .hero-content {
     position: relative; /* Place content above the overlay */
@@ -266,7 +263,6 @@ body.dark-mode .time-unit label {
      color: var(--text-color-dark);
 }
 
-
 /* --- DETAILS SECTION --- */
 .details-section {
     padding: 4rem 2rem;
@@ -309,15 +305,34 @@ body.dark-mode footer {
 }
 
 /* --- RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+    .hero {
+        height: 70vh;
+        padding: 2rem 1rem;
+    }
+    .hero-content {
+        padding: 1.5rem;
+        max-width: 95vw;
+    }
+}
+
 @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .hero {
+        height: 60vh;
+        padding: 1.5rem 0.5rem;
+    }
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     .hero p {
         font-size: 1rem;
     }
     .countdown h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     #timer {
         gap: 0.5rem;
@@ -327,35 +342,49 @@ body.dark-mode footer {
         min-width: 65px;
     }
     .time-unit span {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
-     .details-section h2 {
-        font-size: 2rem;
+    .details-section h2 {
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
-     header {
-        padding: 0.8rem 1rem;
-     }
+    header {
+        padding: 0.8rem 0.5rem;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
     .logo {
-        font-size: 1.2rem;
+        font-size: 1rem;
+    }
+    .hero {
+        height: auto;
+        min-height: 50vh;
+        padding: 1rem 0.2rem;
+    }
+    .hero-content {
+        padding: 1rem 0.2rem;
+        max-width: 100vw;
     }
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.3rem;
     }
-     .cta-button {
-        padding: 10px 25px;
-        font-size: 0.9rem;
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.85rem;
     }
     .time-unit {
-         padding: 0.5rem;
-         min-width: 55px;
+        padding: 0.4rem;
+        min-width: 45px;
     }
-     .time-unit span {
-        font-size: 1.5rem;
+    .time-unit span {
+        font-size: 1.1rem;
     }
-     .time-unit label {
-        font-size: 0.7rem;
+    .time-unit label {
+        font-size: 0.65rem;
+    }
+    .details-section {
+        padding: 2rem 0.5rem;
     }
 }
